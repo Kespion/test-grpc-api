@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package device;
+
+message Device {
+    int32 id = 1;
+    string name = 2;
+    string brand = 3;
+    string model = 4;
+    string os = 5;
+    string version = 6;
+    bool wifi = 7;
+    bool bluetooth = 8;
+}
+
+service DeviceService {
+    rpc GetDeviceById (GetDeviceByIdRequest) returns (Device);
+    rpc GetAllDevices (GetAllDevicesRequest) returns (AllDevicesResponse);
+    rpc AddDevice (AddDeviceRequest) returns (Device);
+    rpc UpdateDevice (UpdateDeviceRequest) returns (Device);
+    rpc DeleteDevice (DeleteDeviceRequest) returns (DeleteDeviceResponse);
+}
+
+message GetDeviceByIdRequest {
+    int32 id = 1;
+}
+
+message GetAllDevicesRequest {}
+
+message AllDevicesResponse {
+    repeated Device devices = 1;
+}
+
+message AddDeviceRequest {
+    Device device = 1;
+}
+
+message UpdateDeviceRequest {
+    int32 id = 1;
+    Device device = 2;
+}
+
+message DeleteDeviceRequest {
+    int32 id = 1;
+}
+
+message DeleteDeviceResponse {
+    bool success = 1;
+}
